@@ -3,6 +3,13 @@
 	//võtab ja kopeerib faili sisu
 	require("../../config.php");
 	require("functions.php");
+	
+	//kas kasutaja on sisse logitud
+	if (isset ($_SESSION["userId"])) {
+		
+		header("Location: data.php");
+		
+	}
 
 	//var_dump(5.5);
 	
