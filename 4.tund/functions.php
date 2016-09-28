@@ -28,7 +28,52 @@
 	}
 	
 	
-	
+	function login($email, $password) {
+		
+		$error = "";
+		
+		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
+
+		$stmt = $mysqli->prepare("
+			SELECT id, email, password, created 
+			FROM user_sample
+			WHERE email = ?
+		");
+		echo $mysqli->error;
+		
+		//asendan küsimärgi
+		$stmt->bind_param("s", $email);
+		
+		//määran tupladele muutujad
+		$stmt->bind_result($id, $emailFromDb, $passwordFromDb, $created);
+		$stmt->execute();
+		
+		//küsin rea andmeid
+		if($stmt->fetch()) {
+			//oli rida
+		
+			// võrdlen paroole
+			$hash = hash("sha512", $password);
+			if($hash == $passwordFromDb) {
+				
+				echo "kasutaja ".$id." logis sisse";
+				
+			} else {
+				$error = "parool vale";
+			}
+			
+		
+		} else {
+			//ei olnud 
+			
+			$error = "sellise emailiga ".$email." kasutajat ei olnud";
+		}
+		
+		
+		return $error;
+		
+		
+	}
 	
 	
 	
