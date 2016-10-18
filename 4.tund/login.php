@@ -1,5 +1,5 @@
 <?php
-	
+	// 4.tund
 	//võtab ja kopeerib faili sisu
 	require("../../config.php");
 	require("functions.php");
@@ -143,20 +143,18 @@
 	   
 	   
 		
-	}
+}
 	
 	$error = "";
-	// kontrollin, et kasutaja täitis välja ja võib sisse logida
+	// kontrollin, et kasutaja täitis välja ja saab sisse logida
 	if ( isset($_POST["loginEmail"]) &&
 		 isset($_POST["loginPassword"]) &&
-		 isset($_POST["loginYearOfBirth"]) &&
 		 !empty($_POST["loginEmail"]) &&
-		 !empty($_POST["loginPassword"]) &&
-		 !empty($_POST["loginYearOfBirth"])
+		 !empty($_POST["loginPassword"])
 	  ) {
 		
 		//login sisse
-		$error = login($_POST["loginEmail"], $_POST["loginPassword"], $_POST["loginYearOfBirth"]);
+		$error = login($_POST["loginEmail"], $_POST["loginPassword"]);
 		
 	}
 	
