@@ -1,0 +1,85 @@
+<?php 
+	require("functions.php");
+	
+	// 2.kodutöö
+	// kas on sisseloginud, kui ei ole siis
+	// suunata login lehele
+	if (!isset ($_SESSION["userId"])) {
+		
+		header("Location: login.php");
+		
+	}
+	
+	//kas ?logout on aadressireal
+	if (isset($_GET["logout"])) {
+		
+		session_destroy();
+		
+		header("Location: login.php");
+		
+	}
+	
+	// ei ole tühjad väljad mida salvestada
+	if ( isset($_POST["gender"]) &&
+		 isset($_POST["age"]) &&
+		 isset($_POST["daynumber"]) &&
+		 isset($_POST["month"]) &&
+		 isset($_POST["year"]) &&
+		 isset($_POST["WorkoutHours"]) &&
+		 !empty($_POST["gender"]) &&
+		 !empty($_POST["age"]) &&
+		 !empty($_POST["daynumber"]) &&
+		 !empty($_POST["month"]) &&
+		 !empty($_POST["year"]) &&
+		 !empty($_POST["WorkoutHours"])
+	  ) {
+		
+		$gender=cleanInput($_POST["gender"]);
+
+		
+		savePeople($_POST["gender"], $_POST["age"], $_POST["daynumber"], $_POST["month"], $_POST["year"], $_POST["WorkoutHours"]);
+	}
+	
+	$people = getAllPeople();
+	
+	//echo "<pre>"; //nüüd näitab netilehel ilusamini andmeid, see rida ei ole tegelikult oluline
+	//var_dump($people);
+	//echo "</pre>";
+	
+?>
+<h1>Treeningu andmete sisestamine</h1>
+<p>
+	Tere tulemast <?=$_SESSION["email"];?>!
+	<a href="?logout=1">Logi välja</a>
+</p> 
+
+<h1>Salvesta andmed</h1>
+<form method="POST">
+			
+	<label>Sugu</label><br>
+	<input type="radio" name="gender" value="male" > Mees<br>
+	<input type="radio" name="gender" value="female" > Naine<br>
+	<input type="radio" name="gender" value="Unknown" > Ei oska öelda<br>
+	
+	<!--<input type="text" name="gender" ><br>-->
+	
+	<br><br>
+	<label>Vanus</label><br>
+	<input name="age" type="age"> 
+	
+	<br><br>
+	<label><h3>Kuupäev</h3></label>
+	<input name="Kuupäev" type="daynumber" placeholder="Kuupäev">
+	<input name="Kuu" type="month" placeholder="Kuu">
+	<input name="Aasta" type="year" placeholder="Aasta">
+	
+	<br><br>
+	<label><h3>Treeningu tunnid</h3></label>
+	<input name="WorkoutHours" type="workouthours">
+	
+	<br><br>
+	<input type="submit" value="Salvesta">
+	
+</form>
+
+	
