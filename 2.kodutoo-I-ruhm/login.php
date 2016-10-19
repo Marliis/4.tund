@@ -9,7 +9,6 @@
 		header("Location: data.php");
 		
 	}
-
 	//var_dump(5.5);
 	
 	//var_dump($_GET);
@@ -205,13 +204,11 @@
 		echo "siin";
 		$_POST["loginEmail"]=cleanInput($_POST["loginEmail"]);
 		$_POST["loginPassword"]=cleanInput($_POST["loginPassword"]);
-
 		//login sisse
 		$error = login($_POST["loginEmail"], $_POST["loginPassword"]);
 		
 	}
 	
-
 ?>
 <!DOCTYPE html>
 <html>

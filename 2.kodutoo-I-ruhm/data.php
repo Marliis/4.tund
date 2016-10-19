@@ -35,7 +35,6 @@
 	  ) {
 		
 		$gender=cleanInput($_POST["gender"]);
-
 		
 		savePeople($_POST["gender"], $_POST["age"], $_POST["daynumber"], $_POST["month"], $_POST["year"], $_POST["WorkoutHours"]);
 	}
@@ -81,5 +80,3 @@
 	<input type="submit" value="Salvesta">
 	
 </form>
-
-	

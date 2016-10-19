@@ -19,16 +19,13 @@
 	function signup ($name, $gender, $age, $email, $password) {
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
-
 		$stmt = $mysqli->prepare("INSERT INTO user_sample (name, gender, age, email, password) VALUES (?, ?, ?, ?, ?)");
 		echo $mysqli->error;
-
 		//asendan küsimärgi väärtustega
 		//iga muutuja kohta tuleb kirjutada üks täht, mis tüüpi muutuja on
 		//s-stringi
 		//i-integer
 		//d-double/float
-
 		$stmt->bind_param("sisss", $name, $age, $email, $password, $gender);
 		
 		if ($stmt->execute()) {
@@ -45,7 +42,6 @@
 		$error = "";
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
-
 		$stmt = $mysqli->prepare("
 			SELECT id, email, password, created 
 			FROM user_sample
@@ -103,7 +99,6 @@
 		// käsk
 		$stmt = $mysqli->prepare("INSERT INTO AthletesData (gender, age, daynumber, month, year, WorkoutHours, created) VALUES (?, ?, ?, ?, ?)");
 		echo $mysqli->error;
-
 		$stmt->bind_param("siiiii", $gender, $age, $daynumber, $month, $year, $WorkoutHours);
 		
 		if ($stmt->execute()) {
@@ -119,7 +114,6 @@
 	function getAllPeople () {
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
-
 		//käsk
 		$stmt = $mysqli->prepare("SELECT id, gender, age, daynumber, month, year, WorkoutHours FROM AthletesData");
 		echo $mysqli->error;
@@ -211,6 +205,4 @@
 	
 	
 	*/
-
-
 ?>
